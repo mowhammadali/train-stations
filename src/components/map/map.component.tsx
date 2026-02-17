@@ -44,7 +44,10 @@ export default function Map({
 				zoom={10}
 				className={styles['map-container']}
 			>
-				<TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png" />
+				<TileLayer
+					url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+					noWrap={true}
+				/>
 				{stations.map(station => (
 					<ZoomToMarker key={station.id} {...station} />
 				))}
