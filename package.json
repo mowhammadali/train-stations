@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "start http://localhost:4040 && next dev -p 4050",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:fix": "eslint . --fix",
+    "lint:check": "eslint .",
+    "prettier:fix": "prettier . --write",
+    "prettier:check": "prettier . --check",
+    "prepare": "husky",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -34,5 +40,9 @@
     "postcss-nesting": "^14.0.0",
     "prettier": "^3.8.1",
     "typescript": "^5"
+  },
+  "lint-staged": {
+    "*": "prettier . --write",
+    "*.{js,jsx,ts,tsx}": "eslint"
   }
 }
