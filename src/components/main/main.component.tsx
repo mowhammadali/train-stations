@@ -3,11 +3,11 @@ import MapWrapperComponent from '@/components/map/components/map-wrapper.compone
 import { getStations } from '@/services/stations.service';
 
 export default async function MainComponent(): Promise<ReactNode> {
-    const response = await getStations();
+	const response = await getStations();
 
 	return (
 		<div>
-			<MapWrapperComponent stations={response}/>
+			<MapWrapperComponent stations={response} />
 		</div>
 	);
 }

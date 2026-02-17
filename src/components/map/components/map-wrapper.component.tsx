@@ -15,5 +15,5 @@ export default function MapWrapperComponent({
 		ssr: false
 	});
 
-	return <Map stations={stations}/>;
+	return <Map stations={stations} />;
 }
