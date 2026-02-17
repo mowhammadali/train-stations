@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "start http://localhost:4040 && next dev -p 4050",
+    "dev": "start http://localhost:4050 && next dev --turbopack -p 4050",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
