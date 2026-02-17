@@ -1,9 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import React, { useMemo } from 'react';
 import L from 'leaflet';
 import styles from './map.module.css';
+import ZoomToMarker from '@/components/map/components/zoom-to-mark.component';
+import FitBounds from '@/components/map/components/fit-bounds.component';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import { type Station } from '@/types/shared.type';
 
 interface IconDefaultWithGetIcon extends L.Icon.Default {
 	_getIconUrl?: () => string;
@@ -17,15 +20,23 @@ L.Icon.Default.mergeOptions({
 	shadowUrl: '/leaflet/marker-shadow.png'
 });
 
-const points: [number, number][] = [
-	[52.52, 13.405],
-	[48.1351, 11.582],
-	[50.1109, 8.6821],
-	[53.5511, 9.9937],
-	[51.2277, 6.7735]
-];
+export type PointsType = [number, number][];
 
-export default function Map(): React.JSX.Element {
+export default function Map({
+	stations
+}: {
+	stations: Station[];
+}): React.JSX.Element {
+	const { points } = useMemo(() => {
+		const points: PointsType = [];
+
+		stations.forEach(station => {
+			points.push([station.lat, station.lng]);
+		});
+
+		return { points: points };
+	}, [stations]);
+
 	return (
 		<div className={styles.map}>
 			<MapContainer
@@ -34,27 +45,11 @@ export default function Map(): React.JSX.Element {
 				className={styles['map-container']}
 			>
 				<TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png" />
-				{points.map((pos, index) => (
-					<Marker key={index} position={pos}>
-						<Popup>
-							<p>Lat: {pos[0]}</p>
-							<p>Long: {pos[1]}</p>
-						</Popup>
-					</Marker>
+				{stations.map(station => (
+					<ZoomToMarker key={station.id} {...station} />
 				))}
-				<FitBounds />
+				<FitBounds points={points} />
 			</MapContainer>
 		</div>
 	);
-}
-
-function FitBounds(): null {
-	const map = useMap();
-
-	useEffect(() => {
-		const bounds = L.latLngBounds(points);
-		map.fitBounds(bounds, { padding: [50, 50] });
-	}, [map]);
-
-	return null;
 }
