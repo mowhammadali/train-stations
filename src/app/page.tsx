@@ -1,6 +1,6 @@
-import { type ReactNode } from "react";
-import styles from "./page.module.css";
+import { type ReactNode } from 'react';
+import styles from './page.module.css';
 
 export default function Home(): ReactNode {
-  return <div className={styles.page}>Train Station</div>;
+	return <div className={styles.page}>Train Station</div>;
 }
