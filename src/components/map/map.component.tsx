@@ -45,7 +45,7 @@ export default function Map({
 				className={styles['map-container']}
 			>
 				<TileLayer
-					url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+					url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
 					noWrap={true}
 				/>
 				{stations.map(station => (

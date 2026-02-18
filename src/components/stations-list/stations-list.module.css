@@ -12,6 +12,7 @@
 	block-size: 16rem;
 	padding-block: 0.8rem;
 
+	border: 2px solid var(--text-primary);
 	border-radius: 0.8rem;
 
 	background-color: var(--bg-surface-3);
@@ -20,6 +21,19 @@
 
 	&.visible {
 		display: block;
+	}
+
+	&::-webkit-scrollbar {
+		width: 0.4rem;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--text-primary);
+		border-radius: 0.6rem;
 	}
 
 	header {
