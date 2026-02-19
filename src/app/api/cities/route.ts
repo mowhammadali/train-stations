@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 const GIST_URL =
 	'https://gist.githubusercontent.com/neysidev/bbd40032f0f4e167a1e6a8b3e99a490c/raw/train-stations.json';
@@ -11,14 +11,11 @@ type Station = {
 	lng: number;
 };
 
-export async function GET(
-	req: NextRequest
-): Promise<NextResponse<Station[] | { error: string; details?: unknown }>> {
+export async function GET(): Promise<
+	NextResponse<string[] | { error: string; details?: unknown }>
+> {
 	try {
 		await new Promise(resolve => setTimeout(resolve, 500));
-
-		const { searchParams } = new URL(req.url);
-		const city = searchParams.get('city');
 
 		const res = await fetch(GIST_URL, {
 			next: { revalidate: 60 }
@@ -33,15 +30,11 @@ export async function GET(
 
 		const stations: Station[] = await res.json();
 
-		let filtered = stations;
+		const uniqueCities = Array.from(
+			new Set(stations.map(station => station.city))
+		);
 
-		if (city) {
-			filtered = filtered.filter(s =>
-				s.city.toLowerCase().includes(city.toLowerCase())
-			);
-		}
-
-		return NextResponse.json(filtered);
+		return NextResponse.json(uniqueCities);
 	} catch (error) {
 		return NextResponse.json(
 			{ error: 'Server error', details: error },
