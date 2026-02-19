@@ -5,3 +5,5 @@ export type Station = {
 	lat: number;
 	lng: number;
 };
+
+export type Cities = string[];
