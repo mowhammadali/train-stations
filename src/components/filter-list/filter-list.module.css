@@ -79,6 +79,10 @@
 			padding-block: 0.6rem;
 
 			border-block-end: 1px solid var(--text-primary);
+
+			> * {
+				cursor: pointer;
+			}
 		}
 	}
 }

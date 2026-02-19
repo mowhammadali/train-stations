@@ -1,6 +1,7 @@
-import { type ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import styles from './page.module.css';
 import MainComponent from '@/components/main/main.component';
+import LoadingComponent from '@/components/loading/loading.component';
 
 export default async function Home({
 	searchParams
@@ -12,7 +13,9 @@ export default async function Home({
 
 	return (
 		<div className={styles.page}>
-			<MainComponent city={city} />
+			<Suspense fallback={<LoadingComponent />}>
+				<MainComponent city={city} />
+			</Suspense>
 		</div>
 	);
 }
