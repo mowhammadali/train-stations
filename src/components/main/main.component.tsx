@@ -3,6 +3,7 @@ import { getStations } from '@/services/stations.service';
 import MapWrapperComponent from '@/components/map/components/map-wrapper.component';
 import NavbarComponent from '@/components/navbar/navbar.component';
 import StationsListComponent from '@/components/stations-list/stations-list.component';
+import FilterListComponent from '@/components/filter-list/filter-list.component';
 
 export default async function MainComponent(): Promise<ReactNode> {
 	const response = await getStations();
@@ -12,6 +13,7 @@ export default async function MainComponent(): Promise<ReactNode> {
 			<MapWrapperComponent stations={response} />
 			<NavbarComponent />
 			<StationsListComponent stationsList={response} />
+			<FilterListComponent stationsList={response} />
 		</div>
 	);
 }
