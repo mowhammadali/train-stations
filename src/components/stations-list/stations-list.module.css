@@ -8,7 +8,7 @@
 
 	overflow: auto;
 
-	inline-size: clamp(16.25rem, calc(15.781rem + 2.083vw), 18.125rem);
+	inline-size: clamp(16.25rem, calc(13.281rem + 14.844vw), 28.125rem);
 	block-size: 16rem;
 	padding-block: 0.8rem;
 

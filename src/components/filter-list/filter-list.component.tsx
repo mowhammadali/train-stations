@@ -5,6 +5,8 @@ import { type Station } from '@/types/shared.type';
 import styles from './filter-list.module.css';
 import MingcuteCloseSquareFill from '@/icons/MingcuteCloseSquareFill';
 import MingcuteFilterFill from '@/icons/MingcuteFilterFill';
+import useFilterStore from '@/store/useFilterStore';
+import clsx from 'clsx';
 
 type PropsType = {
 	stationsList: Station[];
@@ -13,6 +15,8 @@ type PropsType = {
 export default function FilterListComponent({
 	stationsList
 }: PropsType): ReactNode {
+	const { closeFilter, isOpen } = useFilterStore(state => state);
+
 	const [city, setCity] = useState('');
 
 	const uniqueStations = useMemo(() => {
@@ -30,13 +34,16 @@ export default function FilterListComponent({
 	};
 
 	return (
-		<div className={styles['filter-list']}>
+		<div className={clsx(styles['filter-list'], isOpen && styles.visible)}>
 			<header>
 				<div className={styles['title-section']}>
 					<p>Filter</p>
 					<MingcuteFilterFill />
 				</div>
-				<MingcuteCloseSquareFill className={styles['close-icon']} />
+				<MingcuteCloseSquareFill
+					className={styles['close-icon']}
+					onClick={closeFilter}
+				/>
 			</header>
 			<ul>
 				{uniqueStations.map(station => (
